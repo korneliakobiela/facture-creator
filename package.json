@@ -1,0 +1,26 @@
+{
+  "name": "facture-creator",
+  "version": "1.0.0",
+  "description": "Simple facture creator with local pouch database",
+  "main": "./src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/korneliakobiela/facture-creator.git"
+  },
+  "author": "Kornelia Kobiela",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/korneliakobiela/facture-creator/issues"
+  },
+  "homepage": "https://github.com/korneliakobiela/facture-creator#readme",
+  "dependencies": {
+    "pouchdb": "^6.1.1"
+  },
+  "devDependencies": {
+    "electron": "^1.4.14"
+  }
+}
