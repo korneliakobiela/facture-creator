@@ -5,7 +5,8 @@
   "main": "./src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "lint": "eslint */**.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,12 @@
   },
   "homepage": "https://github.com/korneliakobiela/facture-creator#readme",
   "dependencies": {
-    "pouchdb": "^6.1.1"
+    "chai": "^3.5.0",
+    "pouchdb": "^6.1.1",
+    "vue": "^2.1.10"
   },
   "devDependencies": {
-    "electron": "^1.4.14"
+    "electron": "^1.4.14",
+    "eslint": "^3.13.1"
   }
 }
