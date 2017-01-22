@@ -4,7 +4,7 @@
   "description": "Simple facture creator with local pouch database",
   "main": "./src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --reporter=nyan",
     "start": "electron .",
     "lint": "eslint */**.js"
   },
@@ -19,12 +19,13 @@
   },
   "homepage": "https://github.com/korneliakobiela/facture-creator#readme",
   "dependencies": {
-    "chai": "^3.5.0",
     "pouchdb": "^6.1.1",
     "vue": "^2.1.10"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "electron": "^1.4.14",
-    "eslint": "^3.13.1"
+    "eslint": "^3.13.1",
+    "mocha": "^3.2.0"
   }
 }
