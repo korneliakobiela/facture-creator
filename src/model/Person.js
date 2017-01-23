@@ -9,7 +9,7 @@ const Address = require("./Address");
  * @constructor
  */
 function Person(fname, lname, companyname, address, nip) {
-    this.fname = fname || "";
+    this.fname = fname||"";
     this.lname = lname || "";
     this.companyname = companyname || "";
     this.address = address || new Address();
@@ -21,8 +21,8 @@ function Person(fname, lname, companyname, address, nip) {
  */
 Person.prototype.length = function () {
     constructor = Person;
-    return Object.keys(this).length
-};
+     return Object.keys(this).length
+ };
 /**
  * Getting all keys of Person Object
  * @returns {Array}
