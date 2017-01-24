@@ -1,12 +1,13 @@
 {
   "name": "facture-creator",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Simple facture creator with local pouch database",
   "main": "./src/main.js",
   "scripts": {
     "test": "mocha --reporter=nyan",
     "start": "electron .",
-    "lint": "eslint */**.js"
+    "lint": "eslint */**.js",
+    "build":"browserify src/assets/js/index.js -o src/assets/js/bundle.js"
   },
   "repository": {
     "type": "git",

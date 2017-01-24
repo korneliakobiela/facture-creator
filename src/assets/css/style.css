@@ -2,37 +2,64 @@
     font-family: "Roboto Light";
     src: url("../fonts/Roboto-Light.ttf");
 }
+
 * {
-    margin:0;
+    margin: 0;
     padding: 0;
     font-family: "Roboto Light", sans-serif;
 }
-body{
+
+body {
     background-color: #EEEEEE;
     box-sizing: border-box;
     font-family: "Roboto Light", sans-serif;
 }
-.main-header{
+
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: inset #aaa 1px;
+    border-bottom: inset #80CBC4 3px;
     height: 55px;
-    color:#212121;
+    color: #212121;
 }
+
 .main-header img {
     width: 50px;
     height: 50px;
+    margin: 5px;
 
 }
-.main-header button{
+
+.main-header h1 {
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.main-header button {
     padding: 0 20px;
-    border: none;
+    border: solid transparent 2px;
     margin: 0 5px;
     height: 55px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-bottom: #80CBC4 2px;
 }
+
+.main-header button:focus {
+    outline: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: solid #FF4081 2px;
+    border-bottom: #80CBC4 2px;
+}
+
+.main-menu {
+    min-width: 700px;
+}
+
 .active {
     background-color: #80CBC4;
 }
