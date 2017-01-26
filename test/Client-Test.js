@@ -31,7 +31,7 @@ describe("Client - ", function () {
     });
     //generateId tests
     it("Personal client should have first name in ID",function () {
-        expect(client4._id).to.have.string(client4.personaldetails.fname.toLowerCase());
+        expect(client4._id).to.have.string(client4.personaldetails.firstname.toLowerCase());
     });
     it("Bussiness client should have company name in ID",function () {
         expect(client3._id).to.have.string(client4.personaldetails.companyname.toLowerCase());

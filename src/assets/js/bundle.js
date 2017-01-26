@@ -13297,15 +13297,19 @@ const menuEventHandler = function () {
  * @param phone
  * @constructor
  */
-function Address(street,housenumber, localnumber, city, postalcode,phone) {
-    this.street = street||"";
-    this.housenumber = housenumber||"";
-    this.localnumber = localnumber||"";
-    this.city = city||"";
-    this.postalcode = postalcode||"";
-    this.phone = phone||"";
+function Address(street, housenumber, localnumber, city, postalcode, phone) {
+    this.street = street || "";
+    this.housenumber = housenumber || "";
+    this.localnumber = localnumber || "";
+    this.city = city || "";
+    this.postalcode = postalcode || "";
+    this.phone = phone || "";
 }
 
+Address.prototype.getKeys = function () {
+    constructor = Address;
+    return Object.keys(this)
+};
 
 
 module.exports = Address;
@@ -13336,6 +13340,10 @@ Client.prototype.generateForm = function () {
     form.name = "client";
     const keys = this.personaldetails.getKeys();
     for (let i = 0; i < keys.length; i++) {
+        if(keys[i]=="address") {
+            this.personaldetails.generateForm(form);
+            continue;
+        }
         const input = document.createElement("input");
         input.name = keys[i];
         input.type = "text";
@@ -13357,7 +13365,7 @@ Client.prototype.generateForm = function () {
 Client.prototype.generateId = function () {
     constructor = Client;
     const today = new Date();
-    const prefix = this.personaldetails.companyname || this.personaldetails.fname;
+    const prefix = this.personaldetails.companyname || this.personaldetails.firstname;
     return prefix.toLowerCase() + today.getDay()+""+today.getMonth() + today.getSeconds();
 };
 
@@ -13384,16 +13392,16 @@ module.exports = Facture;
 const Address = require("./Address");
 /**
  * An object catching personal Details
- * @param fname {string} First Name
- * @param lname {string} Last Name
+ * @param firstname {string} First Name
+ * @param lastname {string} Last Name
  * @param companyname {string} Company Name
  * @param address {Address} An address
  * @param nip {string} A company identity
  * @constructor
  */
-function Person(fname, lname, companyname, address, nip) {
-    this.fname = fname||"";
-    this.lname = lname || "";
+function Person(firstname, lastname, companyname, address, nip) {
+    this.firstname = firstname||"";
+    this.lastname = lastname || "";
     this.companyname = companyname || "";
     this.address = address || new Address();
     this.nip= nip || "";
@@ -13415,6 +13423,18 @@ Person.prototype.getKeys = function () {
     return Object.keys(this)
 };
 
+Person.prototype.generateForm = function (parentNode) {
+    constructor = Person;
+    const keys = this.address.getKeys();
+    for(let i = 0;i<keys.length;i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = keys[i];
+        input.placeholder = keys[i];
+        parentNode.appendChild(input);
+    }
+
+};
 
 module.exports = Person;
 

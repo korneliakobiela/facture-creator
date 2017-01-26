@@ -24,6 +24,10 @@ Client.prototype.generateForm = function () {
     form.name = "client";
     const keys = this.personaldetails.getKeys();
     for (let i = 0; i < keys.length; i++) {
+        if(keys[i]=="address") {
+            this.personaldetails.generateForm(form);
+            continue;
+        }
         const input = document.createElement("input");
         input.name = keys[i];
         input.type = "text";
@@ -45,7 +49,7 @@ Client.prototype.generateForm = function () {
 Client.prototype.generateId = function () {
     constructor = Client;
     const today = new Date();
-    const prefix = this.personaldetails.companyname || this.personaldetails.fname;
+    const prefix = this.personaldetails.companyname || this.personaldetails.firstname;
     return prefix.toLowerCase() + today.getDay()+""+today.getMonth() + today.getSeconds();
 };
 

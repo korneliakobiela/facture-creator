@@ -11,15 +11,19 @@
  * @param phone
  * @constructor
  */
-function Address(street,housenumber, localnumber, city, postalcode,phone) {
-    this.street = street||"";
-    this.housenumber = housenumber||"";
-    this.localnumber = localnumber||"";
-    this.city = city||"";
-    this.postalcode = postalcode||"";
-    this.phone = phone||"";
+function Address(street, housenumber, localnumber, city, postalcode, phone) {
+    this.street = street || "";
+    this.housenumber = housenumber || "";
+    this.localnumber = localnumber || "";
+    this.city = city || "";
+    this.postalcode = postalcode || "";
+    this.phone = phone || "";
 }
 
+Address.prototype.getKeys = function () {
+    constructor = Address;
+    return Object.keys(this)
+};
 
 
 module.exports = Address;

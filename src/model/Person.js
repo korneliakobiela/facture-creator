@@ -1,16 +1,16 @@
 const Address = require("./Address");
 /**
  * An object catching personal Details
- * @param fname {string} First Name
- * @param lname {string} Last Name
+ * @param firstname {string} First Name
+ * @param lastname {string} Last Name
  * @param companyname {string} Company Name
  * @param address {Address} An address
  * @param nip {string} A company identity
  * @constructor
  */
-function Person(fname, lname, companyname, address, nip) {
-    this.fname = fname||"";
-    this.lname = lname || "";
+function Person(firstname, lastname, companyname, address, nip) {
+    this.firstname = firstname||"";
+    this.lastname = lastname || "";
     this.companyname = companyname || "";
     this.address = address || new Address();
     this.nip= nip || "";
@@ -32,6 +32,18 @@ Person.prototype.getKeys = function () {
     return Object.keys(this)
 };
 
+Person.prototype.generateForm = function (parentNode) {
+    constructor = Person;
+    const keys = this.address.getKeys();
+    for(let i = 0;i<keys.length;i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = keys[i];
+        input.placeholder = keys[i];
+        parentNode.appendChild(input);
+    }
+
+};
 
 module.exports = Person;
 
