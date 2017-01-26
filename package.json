@@ -7,7 +7,8 @@
     "test": "mocha --reporter=nyan",
     "start": "electron .",
     "lint": "eslint */**.js",
-    "build":"browserify src/assets/js/index.js -o src/assets/js/bundle.js"
+    "build": "browserify src/assets/js/index.js -o src/assets/js/bundle.js",
+    "uglify":" uglifyjs src/assets/js/bundle.js --compress --mangle"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "electron": "^1.4.14",
     "eslint": "^3.13.1",
     "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "uglify-js": "^2.7.5"
   }
 }

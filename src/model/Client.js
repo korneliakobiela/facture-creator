@@ -34,6 +34,7 @@ Client.prototype.generateForm = function () {
     const button = document.createElement("input");
     button.type = "button";
     button.id = "add-client";
+    button.value = "Dodaj";
     form.appendChild(button);
     return form;
 };
