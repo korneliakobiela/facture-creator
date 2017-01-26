@@ -13237,8 +13237,13 @@ const Product = require("./../../model/Product");
 const Facture = require("./../../model/Facture");
 const Client = require("./../../model/Client");
 
-const clearMain = function (main) {
+const clearContent = function (main) {
     main.innerHTML = ""
+};
+const toggleClass = function (className,e) {
+    const active = document.querySelector('.'+className);
+    if(active) active.classList.toggle(className, false);
+    e.target.classList.toggle(className, true);
 };
 
 const menuEventHandler = function () {
@@ -13247,28 +13252,27 @@ const menuEventHandler = function () {
     menu.addEventListener("click", function (e) {
         if (e.target !== e.currentTarget) {
             //show focus and active css class
-            document.querySelector('.active').classList.toggle('active', false);
-            e.target.classList.toggle('active', true);
+            toggleClass('active',e);
             //A controller of main-menu.
             const main = document.querySelector("main");
             switch (e.target.id) {
                 case menuItems[0].id:
-                    clearMain(main);
+                    clearContent(main);
                     const client = new Client();
                     const form = client.generateForm();
                     main.appendChild(form);
                     break;
                 case menuItems[1].id:
-                    clearMain(main);
+                    clearContent(main);
                     console.log(e.target.id);
 
                     break;
                 case menuItems[2].id:
-                    clearMain(main);
+                    clearContent(main);
                     console.log(e.target.id);
                     break;
                 case menuItems[3].id:
-                    clearMain(main);
+                    clearContent(main);
                     console.log(e.target.id);
                     break;
             }
@@ -13278,7 +13282,7 @@ const menuEventHandler = function () {
 
 };
 
-menuEventHandler();
+ menuEventHandler();
 },{"./../../model/Address":15,"./../../model/Client":16,"./../../model/Facture":17,"./../../model/Person":18,"./../../model/Product":19,"./db":13}],15:[function(require,module,exports){
 /**
  * Created by kornelia on 21.01.17.
