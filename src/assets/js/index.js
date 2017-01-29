@@ -7,13 +7,14 @@ const Address = require("./../../model/Address");
 const Product = require("./../../model/Product");
 const Facture = require("./../../model/Facture");
 const Client = require("./../../model/Client");
+const events = require("./events");
 
 const clearContent = function (main) {
     main.innerHTML = ""
 };
-const toggleClass = function (className,e) {
-    const active = document.querySelector('.'+className);
-    if(active) active.classList.toggle(className, false);
+const toggleClass = function (className, e) {
+    const active = document.querySelector('.' + className);
+    if (active) active.classList.toggle(className, false);
     e.target.classList.toggle(className, true);
 };
 
@@ -23,20 +24,23 @@ const menuEventHandler = function () {
     menu.addEventListener("click", function (e) {
         if (e.target !== e.currentTarget) {
             //show focus and active css class
-            toggleClass('active',e);
+            toggleClass('active', e);
             //A controller of main-menu.
             const main = document.querySelector("main");
             switch (e.target.id) {
                 case menuItems[0].id:
                     clearContent(main);
                     const client = new Client();
-                    const form = client.generateForm();
+                    const form = client.generateForm(function () {
+                        events.addButtonClickCallback(client);
+                    });
                     main.appendChild(form);
                     break;
                 case menuItems[1].id:
                     clearContent(main);
-                    console.log(e.target.id);
-
+                    const facture = new Facture();
+                    const Factureform = facture.generateForm();
+                    main.appendChild(Factureform);
                     break;
                 case menuItems[2].id:
                     clearContent(main);
@@ -53,4 +57,4 @@ const menuEventHandler = function () {
 
 };
 
- menuEventHandler();
+menuEventHandler();

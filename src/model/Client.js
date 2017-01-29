@@ -13,33 +13,38 @@ function Client(personaldetails, factureList, _id) {
     this.personaldetails = personaldetails || new Person();
     this.factureList = factureList || [];
     this._id = _id || this.generateId();
+    //this.completed = false;
 }
 /**
  * Generate form to add new Client
  * @returns {Element}
  */
-Client.prototype.generateForm = function () {
-    constructor = Client;
+Client.prototype.generateForm = function (callback) {
+    //constructor = Client;
     const form = document.createElement("form");
     form.name = "client";
+    form.id = "client";
     const keys = this.personaldetails.getKeys();
+    //TODO: for(const key in this.personaldetails) {
     for (let i = 0; i < keys.length; i++) {
-        if(keys[i]=="address") {
+        if (keys[i] == "address") {
             this.personaldetails.generateForm(form);
             continue;
         }
         const input = document.createElement("input");
         input.name = keys[i];
         input.type = "text";
-        input.id=keys[i];
+        input.id = keys[i];
         input.placeholder = keys[i];
         form.appendChild(input);
     }
     const button = document.createElement("input");
     button.type = "button";
     button.id = "add-client";
-    button.value = "Dodaj";
+    button.value = "Add";
+    button.addEventListener("click", callback);
     form.appendChild(button);
+
     return form;
 };
 /**
@@ -48,9 +53,14 @@ Client.prototype.generateForm = function () {
  */
 Client.prototype.generateId = function () {
     constructor = Client;
-    const today = new Date();
-    const prefix = this.personaldetails.companyname || this.personaldetails.firstname;
-    return prefix.toLowerCase() + today.getDay()+""+today.getMonth() + today.getSeconds();
+
+    const prefix = this.personaldetails.companyname || this.personaldetails.firstname + this.personaldetails.lastname;
+    return prefix.toLowerCase() + new Date().getMonth() + '/' + new Date().getFullYear();
 };
+
+Client.prototype.getFactureNumber = function () {
+    return this.factureList.length
+};
+
 
 module.exports = Client;

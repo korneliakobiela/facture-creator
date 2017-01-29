@@ -14,4 +14,9 @@ function Product(name,pricenetto,tax){
     this.tax = tax;
 }
 
+Product.prototype.getKeys = function () {
+  constructor = Product;
+  return Object.keys(this);
+};
+
 module.exports =Product;

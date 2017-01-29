@@ -5,15 +5,15 @@ const Address = require("./Address");
  * @param lastname {string} Last Name
  * @param companyname {string} Company Name
  * @param address {Address} An address
- * @param nip {string} A company identity
+ * @param taxnumber {string} A company identity
  * @constructor
  */
-function Person(firstname, lastname, companyname, address, nip) {
+function Person(firstname, lastname, companyname, address, taxnumber) {
     this.firstname = firstname||"";
     this.lastname = lastname || "";
     this.companyname = companyname || "";
     this.address = address || new Address();
-    this.nip= nip || "";
+    this.taxnumber= taxnumber || "";
 }
 /**
  * Length (Number of keys) into Person Object
@@ -37,6 +37,7 @@ Person.prototype.generateForm = function (parentNode) {
     const keys = this.address.getKeys();
     for(let i = 0;i<keys.length;i++) {
         const input = document.createElement("input");
+        input.name = keys[i];
         input.type = "text";
         input.id = keys[i];
         input.placeholder = keys[i];

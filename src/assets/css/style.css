@@ -64,12 +64,44 @@ body {
     background-color: #80CBC4;
 }
 
-main{
+main {
     display: flex;
     justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
 }
-main form{
+
+main form {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 70%;
+}
+
+main form input {
+    font-size: 14px;
+    line-height: 1.2em;
+    padding: 2%;
+    margin: 1%;
+    border: none;
+}
+
+input[type=button] {
+    padding: 0 20px;
+    border: solid transparent 2px;
+    height: 55px;
+}
+
+input[type=button]:active {
+    background: #80CBC4;
+}
+
+input:focus {
+    outline-color: #FF4081;
+}
+fieldset{
+    border:none;
+}
+fieldset input {
+    width: 27.25%;
 }
