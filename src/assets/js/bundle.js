@@ -13234,11 +13234,36 @@ module.exports = (function () {
                 }
             });
         },
-        showClients: function (client) {
+        showClients: function (main, client) {
             factureBase.allDocs({include_docs: true, descending: true},
                 function (err, res) {
                     if (!err) {
-                        console.log(res);
+                        res = res.rows;
+                        const select = client.showClients(res);
+                        const out = document.createElement("section");
+                        out.id = "out-client";
+                        main.appendChild(select);
+                        main.appendChild(out);
+                        select.addEventListener('input', function (e) {
+                            out.innerHTML = "";
+                            factureBase.get(e.target.value, function (err, res) {
+                                if (!err) {
+                                    const restdata = res["personaldetails"]
+                                    for (const i in restdata) {
+                                        if (restdata.hasOwnProperty(i)) {
+                                            out.innerHTML += restdata[i] + "<br>";
+                                            if (i == "address") {
+                                                for (const j in restdata.address) {
+                                                    if (restdata.address.hasOwnProperty(j))
+                                                        out.innerHTML += restdata.address[j] + "<br>";
+                                                }
+                                            }
+                                        }
+                                    }
+                                    out.innerHTML += JSON.stringify(res);
+                                }
+                            })
+                        })
                     } else {
                         console.log(err);
                     }
@@ -13255,31 +13280,39 @@ module.exports = (function () {
  */
 const db = require("./db.js");
 const events = {
-  addButtonClickCallback:function (client) {
-      const form = document.querySelector("#client");
-      const data = new FormData(form);
-      for (i in client.personaldetails) {
-          if (client.personaldetails.hasOwnProperty(i)) {
-              if (i == "address") {
-                  for (j in client.personaldetails.address) {
-                      if (client.personaldetails.address.hasOwnProperty(j)) {
-                          client.personaldetails.address[j] = data.get(j);
-                      }
-                  }
-              }
-              else {
-                  client.personaldetails[i] = data.get(i);
-              }
-          }
-      }
-      client._id = client.generateId();
-      console.log(client);
-      db.addClient(client);
-      db.showClients(client);
-  }
+    addButtonClickCallback: function (client) {
+        const form = document.querySelector("#client");
+        const data = new FormData(form);
+        for (i in client.personaldetails) {
+            if (client.personaldetails.hasOwnProperty(i)) {
+                if (i == "address") {
+                    for (j in client.personaldetails.address) {
+                        if (client.personaldetails.address.hasOwnProperty(j)) {
+                            client.personaldetails.address[j] = data.get(j);
+                        }
+                    }
+                }
+                else {
+                    client.personaldetails[i] = data.get(i);
+                }
+            }
+        }
+        client._id = client.generateId();
+        console.log(client);
+        db.addClient(client);
+
+    },
+    addSelectClientsCallback: function (e,main) {
+        const output = document.createElement("output");
+        output.id="client-out";
+        main.appendChild(output);
+
+
+    }
 };
 
 module.exports = events;
+
 },{"./db.js":13}],15:[function(require,module,exports){
 /**
  * Created by kornelia on 19.01.17.
@@ -13310,10 +13343,11 @@ const menuEventHandler = function () {
             toggleClass('active', e);
             //A controller of main-menu.
             const main = document.querySelector("main");
+            const client = new Client();
             switch (e.target.id) {
                 case menuItems[0].id:
                     clearContent(main);
-                    const client = new Client();
+
                     const form = client.generateForm(function () {
                         events.addButtonClickCallback(client);
                     });
@@ -13327,6 +13361,7 @@ const menuEventHandler = function () {
                     break;
                 case menuItems[2].id:
                     clearContent(main);
+                    db.showClients(main,client);
                     console.log(e.target.id);
                     break;
                 case menuItems[3].id:
@@ -13421,6 +13456,17 @@ Client.prototype.generateForm = function (callback) {
 
     return form;
 };
+Client.prototype.showClients = function (res) {
+    const datalist = document.createElement("select");
+    datalist.id = "clients";
+    for(let i = 0;i<res.length;i++) {
+        const option = document.createElement("option");
+        option.setAttribute("value",res[i].id);
+        option.innerHTML = res[i].id;
+        datalist.appendChild(option);
+    }
+    return datalist
+};
 /**
  * Generates standard Client ID if it isn't exists
  * @returns {string} id - the unique identity of every
@@ -13429,7 +13475,7 @@ Client.prototype.generateId = function () {
     constructor = Client;
 
     const prefix = this.personaldetails.companyname || this.personaldetails.firstname + this.personaldetails.lastname;
-    return prefix.toLowerCase() + new Date().getMonth() + '/' + new Date().getFullYear();
+    return prefix.toLowerCase() + new Date().getMonth()+1 + '' + new Date().getFullYear();
 };
 
 Client.prototype.getFactureNumber = function () {

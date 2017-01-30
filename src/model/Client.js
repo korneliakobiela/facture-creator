@@ -47,6 +47,17 @@ Client.prototype.generateForm = function (callback) {
 
     return form;
 };
+Client.prototype.showClients = function (res) {
+    const datalist = document.createElement("select");
+    datalist.id = "clients";
+    for(let i = 0;i<res.length;i++) {
+        const option = document.createElement("option");
+        option.setAttribute("value",res[i].id);
+        option.innerHTML = res[i].id;
+        datalist.appendChild(option);
+    }
+    return datalist
+};
 /**
  * Generates standard Client ID if it isn't exists
  * @returns {string} id - the unique identity of every
@@ -55,7 +66,7 @@ Client.prototype.generateId = function () {
     constructor = Client;
 
     const prefix = this.personaldetails.companyname || this.personaldetails.firstname + this.personaldetails.lastname;
-    return prefix.toLowerCase() + new Date().getMonth() + '/' + new Date().getFullYear();
+    return prefix.toLowerCase() + new Date().getMonth()+1 + '' + new Date().getFullYear();
 };
 
 Client.prototype.getFactureNumber = function () {

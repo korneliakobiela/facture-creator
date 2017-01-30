@@ -27,10 +27,11 @@ const menuEventHandler = function () {
             toggleClass('active', e);
             //A controller of main-menu.
             const main = document.querySelector("main");
+            const client = new Client();
             switch (e.target.id) {
                 case menuItems[0].id:
                     clearContent(main);
-                    const client = new Client();
+
                     const form = client.generateForm(function () {
                         events.addButtonClickCallback(client);
                     });
@@ -44,6 +45,7 @@ const menuEventHandler = function () {
                     break;
                 case menuItems[2].id:
                     clearContent(main);
+                    db.showClients(main,client);
                     console.log(e.target.id);
                     break;
                 case menuItems[3].id:

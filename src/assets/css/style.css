@@ -67,6 +67,10 @@ body {
 main {
     display: flex;
     justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
     padding: 30px;
     box-sizing: border-box;
 }
@@ -96,7 +100,7 @@ input[type=button]:active {
     background: #80CBC4;
 }
 
-input:focus {
+input:focus, select:focus, option:focus {
     outline-color: #FF4081;
 }
 fieldset{
@@ -104,4 +108,13 @@ fieldset{
 }
 fieldset input {
     width: 27.25%;
+}
+select#clients {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1%;
+    margin:1%;
+    border: none;
 }
