@@ -54,6 +54,9 @@ Facture.prototype = {
         button.type = "button";
         button.value = "Add";
         form.appendChild(button);
+        button.addEventListener('click',function (e) {
+
+        });
         return form;
     }
 };

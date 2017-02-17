@@ -40,17 +40,15 @@ const menuEventHandler = function () {
                 case menuItems[1].id:
                     clearContent(main);
                     const facture = new Facture();
-                    const Factureform = facture.generateForm();
-                    main.appendChild(Factureform);
+                    db.addFacture(main,facture,client,clearContent);
                     break;
                 case menuItems[2].id:
                     clearContent(main);
                     db.showClients(main,client);
-                    console.log(e.target.id);
                     break;
                 case menuItems[3].id:
                     clearContent(main);
-                    console.log(e.target.id);
+
                     break;
             }
         }

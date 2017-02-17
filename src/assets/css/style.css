@@ -103,18 +103,30 @@ input[type=button]:active {
 input:focus, select:focus, option:focus {
     outline-color: #FF4081;
 }
-fieldset{
-    border:none;
+
+fieldset {
+    border: none;
 }
+
 fieldset input {
     width: 27.25%;
 }
-select#clients {
+
+#clients {
     width: 70%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 1%;
-    margin:1%;
+    margin: 1%;
     border: none;
+}
+
+#out-client td {
+    border: solid 2px #80CBC4;
+    padding: 12px;
+}
+
+#out-client {
+    width: 70%;
 }

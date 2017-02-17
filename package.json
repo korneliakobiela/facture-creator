@@ -1,6 +1,6 @@
 {
   "name": "facture-creator",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "description": "Simple facture creator with local pouch database",
   "main": "./src/main.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "start": "electron .",
     "lint": "eslint */**.js",
     "build": "browserify src/assets/js/index.js -o src/assets/js/bundle.js",
-    "uglify":" uglifyjs src/assets/js/bundle.js --compress --mangle"
+    "uglify": " uglifyjs src/assets/js/bundle.js --compress --mangle",
+    "package": "electron-packager . --all --icon src/assets/img/icon.png --overwrite "
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "electron": "^1.4.15",
+    "electron-packager": "^8.5.1",
     "eslint": "^3.13.1",
     "mocha": "^3.2.0",
     "sinon": "^1.17.7",

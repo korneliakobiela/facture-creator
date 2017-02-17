@@ -25,11 +25,23 @@ const events = {
         db.addClient(client);
 
     },
-    addSelectClientsCallback: function (e,main) {
-        const output = document.createElement("output");
-        output.id="client-out";
-        main.appendChild(output);
+    addSelectClientsCallback: function (err,res,out) {
+        if (!err) {
+            const restdata = res["personaldetails"];
+            for (const i in restdata) {
+                if (restdata.hasOwnProperty(i)) {
+                    if (i == "address") {
+                        for (const j in restdata.address) {
+                            if (restdata.address.hasOwnProperty(j))
+                                out.innerHTML += "<tr><td>" + j + ": </td><td>" + restdata.address[j] + "</td></tr>";
+                        }
+                        continue;
+                    }
+                    out.innerHTML += "<tr><td>" + i + ": </td><td>" + restdata[i] + "</td></tr>";
+                }
+            }
 
+        }
 
     }
 };

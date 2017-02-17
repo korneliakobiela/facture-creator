@@ -49,10 +49,14 @@ Client.prototype.generateForm = function (callback) {
 };
 Client.prototype.showClients = function (res) {
     const datalist = document.createElement("select");
+    const stdOption = document.createElement("option");
+    stdOption.value = "Choose client";
+    stdOption.innerHTML = stdOption.value;
     datalist.id = "clients";
-    for(let i = 0;i<res.length;i++) {
+    datalist.appendChild(stdOption);
+    for (let i = 0; i < res.length; i++) {
         const option = document.createElement("option");
-        option.setAttribute("value",res[i].id);
+        option.setAttribute("value", res[i].id);
         option.innerHTML = res[i].id;
         datalist.appendChild(option);
     }
@@ -64,9 +68,9 @@ Client.prototype.showClients = function (res) {
  */
 Client.prototype.generateId = function () {
     constructor = Client;
-
     const prefix = this.personaldetails.companyname || this.personaldetails.firstname + this.personaldetails.lastname;
-    return prefix.toLowerCase() + new Date().getMonth()+1 + '' + new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
+    return prefix.toLowerCase() + month + '' + new Date().getFullYear();
 };
 
 Client.prototype.getFactureNumber = function () {
